@@ -3,21 +3,27 @@ package mainClasses;
 public class Link {
 
 	private String textLink;
+	private boolean linkValido;
 	
 	public Link(String texto){
-		if(linkValido(texto)){
-			this.textLink = texto;
-		}
+		this.textLink = texto;
+		verificaLinkValido();
+		
 	}
 	
 	/** Metodo que analisa se o texto-link é valido ou nao
 	 * 
-	 * @param link
-	 * @return boolean
 	 */
-	private boolean linkValido(String link){
+	private void verificaLinkValido(){
 		this.textLink.split("//");
-		return false;
+	}
+
+	public boolean isLinkValido() {
+		return linkValido;
+	}
+
+	public void setLinkValido(boolean linkValido) {
+		this.linkValido = linkValido;
 	}
 
 }

@@ -1,10 +1,12 @@
 package mainClasses;
 
+import java.util.ArrayList;
+
 public class Usuario {
 	
 	private String login;
 	private String senha;
-	
+	private ArrayList<Link> linksPostados;
 	
 	/** Construtor da classe Usuario. Recebe um login e uma senha
 	 * para criar um novo usuario.
@@ -14,16 +16,20 @@ public class Usuario {
 	public Usuario(String login, String senha){
 		setLogin(login);
 		setSenha(senha);
-		
+		this.linksPostados = new ArrayList<Link>();
 	}
 
+	public void postarLink(String link) {
+		Link novoLink = new Link(link);
+		this.linksPostados.add(novoLink);
+	}
+	
 	/** Metodo que retorna o numero de links que o usuario postou.
 	 * 
 	 * @return tamanho lista de links postados
 	 */
 	public int getNumeroLinksPostados(){
-		GerenciaLinks gerenciaLinks = new GerenciaLinks();
-		return gerenciaLinks.getNumLinksDeUsuario(this);
+		return this.linksPostados.size();
 	}
 	
 	/** Metodo que configura o login do usuario.
@@ -57,6 +63,5 @@ public class Usuario {
 	public String getSenha(){
 		return this.senha;
 	}
-	
 	
 }

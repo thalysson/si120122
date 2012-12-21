@@ -1,26 +1,29 @@
 package mainClasses;
 
-
-import java.util.ArrayList;
-
 public class MicroBlog {
 	
-	private ArrayList<Usuario> usuarios;
-
+	private GerenciaUsuarios gerenciaUsuarios;
 	
 	public MicroBlog(){
-		this.usuarios = new ArrayList<Usuario>();
+		gerenciaUsuarios = new GerenciaUsuarios();
 	}
 	
 	public void criaNovoUsuario(String login, String senha) {
-		Usuario user = new Usuario(login, senha);
-		usuarios.add(user);
-		
+		this.gerenciaUsuarios.criaNovoUsuario(login,senha);
+	}
+	
+	public int getNumeroUsuarios() {
+		return this.gerenciaUsuarios.getNumeroUsuarios();
+	}
+	
+	public void usuarioPostarLink(String link) {
+		this.gerenciaUsuarios.usuarioPostarLink(link);
 	}
 
-	public int getNumeroUsuarios() {
-		return this.usuarios.size();
-		
+	public int numeroPostsUsuario() {
+		return this.gerenciaUsuarios.numPostsUsuario();
 	}
+
+	
 
 }

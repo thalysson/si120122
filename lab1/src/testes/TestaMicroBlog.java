@@ -18,7 +18,6 @@ public class TestaMicroBlog {
 	@Test
 	public void testCriaUsuario() {
 		assertEquals(0,microBlog.getNumeroUsuarios());
-		
 		microBlog.criaNovoUsuario("login","senha");
 		assertEquals(1,microBlog.getNumeroUsuarios());
 	}
@@ -26,7 +25,13 @@ public class TestaMicroBlog {
 	@Test
 	public void testUsuarioPostarLink() {		
 		microBlog.criaNovoUsuario("login","senha");
+		assertEquals(0, microBlog.numeroPostsUsuario());
+		
+		microBlog.usuarioPostarLink("http://www.google.com.br");
+		assertEquals(1, microBlog.numeroPostsUsuario());
 
+		microBlog.usuarioPostarLink("https://www.bradesco.com.br");
+		assertEquals(2, microBlog.numeroPostsUsuario());
 	}
 
 }
