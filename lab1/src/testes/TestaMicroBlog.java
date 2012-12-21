@@ -22,5 +22,11 @@ public class TestaMicroBlog {
 		microBlog.criaNovoUsuario("login","senha");
 		assertEquals(1,microBlog.getNumeroUsuarios());
 	}
+	
+	@Test
+	public void testUsuarioPostarLink() {		
+		microBlog.criaNovoUsuario("login","senha");
+
+	}
 
 }
