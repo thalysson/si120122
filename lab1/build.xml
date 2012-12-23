@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<project name="lab1" default="all" basedir=".">
+
+<description> A build file for this project </description>
+
+<property name="source.dir" location="src"/>
+<property name="build.dir" location="bin"/>
+<property name="main.class" value="hello.HelloWorld"/>
+
+
+<!-- target clean - Limpa conteudo das pastas build e doc -->
+<target name="clean" description="limpar workspace">
+	<echo> Cleaning the project... </echo>
+	<delete dir="${build.dir}"/>
+	<delete dir="${doc.dir}"/>
+	<delete>
+		<fileset defaultexcludes="no" dir="${source.dir}" includes="**/*~"/>
+	</delete>
+	<echo> Project cleaned. </echo>
+</target>
+
+
+<!-- target init - Cria pastas build e doc -->
+<target name="init" description="configura pastas para projeto">
+	<echo> Creating bin folder... </echo>
+	<mkdir dir="${build.dir}"/>
+	<echo> Folder created. </echo>
+</target>
+
+
+<!--target compile - Compila o projeto e separa os arquivos .class na pasta bin.-->
+<target name="compile" depends="init" description="compilando codigo fonte">  
+	<echo> Compilando o projeto...</echo>  
+	<javac srcdir="${source.dir}/mainClasses" destdir="${build.dir}"
+includeantruntime="false"/>
+	<echo> Projeto Compilado.</echo>  
+</target>
+
+
+<target name="war" depends="compile">
+    <echo> Gerando arquivo .war.</echo>
+    <war destfile="lab1.war" webxml="WebContent/WEB-INF/web.xml">
+        <fileset dir="WebContent"/>
+        <lib dir="WebContent/WEB-INF/lib"/>
+        <classes dir="bin/classes"/>
+    </war>
+    <echo> Arquivo .war gerado.</echo>
+</target>
+
+
+<!-- target all - Inicia execução do ant build -->
+<target name="all" depends="clean, war">
+<echo> Executing app... </echo>
+</target>
+
+</project>

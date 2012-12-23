@@ -1,5 +1,10 @@
 package mainClasses;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 public class Link {
 
 	private String textLink;
@@ -7,15 +12,24 @@ public class Link {
 	
 	public Link(String texto){
 		this.textLink = texto;
-		verificaLinkValido();
+		setLinkValido(verificaLinkValido());
 		
 	}
 	
 	/** Metodo que analisa se o texto-link é valido ou nao
 	 * 
 	 */
-	private void verificaLinkValido(){
-		this.textLink.split("//");
+	private boolean verificaLinkValido(){
+		try {
+		    URL url = new URL(this.textLink);
+		    URLConnection connection = url.openConnection();
+		    connection.connect();
+		    return true;
+		} catch (MalformedURLException e) {
+		    return false;
+		} catch (IOException e) {
+		    return false;
+		}
 	}
 
 	public boolean isLinkValido() {
