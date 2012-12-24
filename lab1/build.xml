@@ -27,17 +27,23 @@
 	<echo> Folder created. </echo>
 </target>
 
-
 <!--target compile - Compila o projeto e separa os arquivos .class na pasta bin.-->
 <target name="compile" depends="init" description="compilando codigo fonte">  
 	<echo> Compilando o projeto...</echo>  
-	<javac srcdir="${source.dir}/mainClasses" destdir="${build.dir}"
+	<javac srcdir="${source.dir}" destdir="${build.dir}"
 includeantruntime="false"/>
 	<echo> Projeto Compilado.</echo>  
 </target>
 
 
-<target name="war" depends="compile">
+<!--target test - Executa os testes do projeto-->
+<target name="test" depends="init" description="testando o codigo">  
+	<echo> Testando o codigo fonte...</echo>  
+
+	<echo> Teste concluido.</echo>  
+</target>
+
+<target name="war" depends="compile" description="gera arquivo .war">
     <echo> Gerando arquivo .war.</echo>
     <war destfile="lab1.war" webxml="WebContent/WEB-INF/web.xml">
         <fileset dir="WebContent"/>

@@ -28,10 +28,27 @@ public class TestaMicroBlog {
 		assertEquals(0, microBlog.numeroPostsUsuario());
 		
 		microBlog.usuarioPostarLink("http://www.google.com.br");
+		assertEquals(true, microBlog.linkPostadoIsValido());
 		assertEquals(1, microBlog.numeroPostsUsuario());
+		
 
 		microBlog.usuarioPostarLink("https://www.bradesco.com.br");
+		assertEquals(true, microBlog.linkPostadoIsValido());
+		assertEquals(2, microBlog.numeroPostsUsuario());
+
+		microBlog.usuarioPostarLink("www.google.com.br");
+		assertEquals(false, microBlog.linkPostadoIsValido());
 		assertEquals(2, microBlog.numeroPostsUsuario());
 	}
 
+	@Test
+	public void testRetorneUltimasPostagens(){
+		microBlog.criaNovoUsuario("login_1@login_1.com","senha");
+		microBlog.usuarioPostarLink("http://www.google.com.br");
+		
+		microBlog.criaNovoUsuario("login_2@login_2.com","senha");
+		microBlog.usuarioPostarLink("http://www.facebook.com");
+		
+		//assertEquals(,microBlog.getUltimasPostagensAllUsers());
+	}
 }

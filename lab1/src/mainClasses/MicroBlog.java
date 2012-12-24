@@ -1,5 +1,7 @@
 package mainClasses;
 
+import java.util.List;
+
 public class MicroBlog {
 	
 	private GerenciaUsuarios gerenciaUsuarios;
@@ -23,7 +25,15 @@ public class MicroBlog {
 	public int numeroPostsUsuario() {
 		return this.gerenciaUsuarios.numPostsUsuario();
 	}
+	
+	public boolean linkPostadoIsValido(){
+		return this.gerenciaUsuarios.linkPostadoIsValido();
+	}
 
+	public List<Link> getUltimasPostagensAllUsers() {
+		return this.gerenciaUsuarios.getUltimasPostagensAllUsers();
+		
+	}
 	
 
 }

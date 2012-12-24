@@ -1,35 +1,28 @@
 package mainClasses;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.util.Date;
 
 public class Link {
 
 	private String textLink;
 	private boolean linkValido;
+	private Date dataLink;
 	
 	public Link(String texto){
 		this.textLink = texto;
 		setLinkValido(verificaLinkValido());
-		
+		this.dataLink = new Date();
 	}
 	
 	/** Metodo que analisa se o texto-link é valido ou nao
 	 * 
 	 */
 	private boolean verificaLinkValido(){
-		try {
-		    URL url = new URL(this.textLink);
-		    URLConnection connection = url.openConnection();
-		    connection.connect();
-		    return true;
-		} catch (MalformedURLException e) {
-		    return false;
-		} catch (IOException e) {
-		    return false;
+		String prefixoLink = this.textLink.split("//")[0];
+		if(prefixoLink.contains("http:") || prefixoLink.contains("https:")){
+			return true;
 		}
+		return false;
 	}
 
 	public boolean isLinkValido() {
@@ -40,4 +33,8 @@ public class Link {
 		this.linkValido = linkValido;
 	}
 
+	public Date getDataDoLink(){
+		return this.dataLink;
+	}
+	
 }
