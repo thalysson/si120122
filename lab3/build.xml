@@ -1,0 +1,76 @@
+<project name="Lab3ANT" default="" basedir=".">
+	<description>
+            Lab3 - si120122
+    </description>
+
+	<property name="sysName" value="Lab3" />
+	<property name="source.dir" value="${basedir}/src" />
+	<property name="build.dir" value="build" />
+	<property name="dist.dir" value="dist" />
+	<property name="doc.dir" value="doc" />
+
+	<!-- INIT - inicia os diretorios a serem ultilizados-->
+	<target name="init">
+		<echo>Criando diretório de build e dist.</echo>
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir}/classes" />
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${doc.dir}" />
+	</target>
+
+	<!-- limpa - limpa as pastas do sistema -->
+	<target name="limpa">
+		<echo>Limpando........</echo>
+		<delete dir="${build.dir}" />
+		<delete dir="${doc.dir}" />
+		<echo>Processo de Limpeza concluido com sucesso.</echo>
+	</target>
+
+	<!-- compila  - compila o projeto -->
+	<target name="compila" depends="init" description="Compila o projeto.">
+		<echo>Compilando o projeto.</echo>
+		<javac includeantruntime="false" srcdir="${source.dir}" destdir="${build.dir}/classes" debug="true">
+			<classpath refid="compile.classpath" />
+			<classpath refid="test.classpath" />
+		</javac>
+		<echo>Processo de compile concluido com sucesso.</echo>
+	</target>
+
+
+
+	<!-- paths -->
+	<path id="compile.classpath">
+		<fileset dir="${webLibs}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${sysLibs}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<!-- pacotes para testes -->
+	<path id="test.classpath">
+		<pathelement location="/lib/junit.jar" />
+		<pathelement location="${source.dir}" />
+	</path>
+
+
+
+
+	<!-- doc - gera a documentação -->
+	<target name="doc" depends="compila" description="generate documentation">
+		<echo> Gerando o javadoc </echo>
+		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}">
+			<classpath refid="compile.classpath" />
+		</javadoc>
+		<echo> Javadoc gerado. </echo>
+	</target>
+
+
+
+
+	<target name="testa" depends="compila" description="Testes de unidade">
+		<echo>Iniciando testes de unidade...</echo>
+	</target>
+
+
+</project>
